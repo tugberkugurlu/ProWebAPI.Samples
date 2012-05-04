@@ -92,8 +92,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APIs\CarsSyncController.cs" />
-    <Compile Include="APIs\CarsAsyncController.cs" />
     <Compile Include="APIs\SPCarsAsyncController.cs" />
     <Compile Include="APIs\SPCarsSyncController.cs" />
     <Compile Include="Global.asax.cs">
@@ -102,7 +100,6 @@
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\Extensions.cs" />
     <Compile Include="Models\GalleryContext.cs" />
-    <Compile Include="Models\IGalleryContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -134,7 +131,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3800/</IISUrl>
+          <IISUrl>http://localhost:3801/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

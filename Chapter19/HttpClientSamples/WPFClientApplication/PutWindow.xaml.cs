@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,15 +16,13 @@ using Newtonsoft.Json;
 using WPFClientApplication.Model;
 
 namespace WPFClientApplication {
-
     /// <summary>
-    /// Interaction logic for PostWindow.xaml
+    /// Interaction logic for PutWindow.xaml
     /// </summary>
-    public partial class PostWindow : Window {
+    public partial class PutWindow : Window {
 
-        public PostWindow() {
+        public PutWindow() {
 
-            DataContext = new Car();
             InitializeComponent();
         }
 
@@ -40,7 +37,7 @@ namespace WPFClientApplication {
                 );
                 jsonContent.Headers.ContentType.MediaType = "application/json";
 
-                var response = await httpClient.PostAsync(
+                var response = await httpClient.PutAsync(
                     Constants.BASE_API_ADDRESS, jsonContent
                 );
 
@@ -61,7 +58,6 @@ namespace WPFClientApplication {
                     this.Close();
                 }
             }
-
         }
     }
 }

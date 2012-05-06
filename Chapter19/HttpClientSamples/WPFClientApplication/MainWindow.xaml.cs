@@ -23,38 +23,9 @@ namespace WPFClientApplication {
     /// </summary>
     public partial class MainWindow : Window {
 
-        const string baseAPIAddress = "http://localhost:11421/api/cars";
-
         public MainWindow() {
-
+            
             InitializeComponent();
-        }
-
-        private async void Button_Click_1(object sender, RoutedEventArgs e) {
-
-            await bindListBoxData();
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e) {
-
-            var postWindow = new PostWindow();
-
-            postWindow.Closed += postWindow_Closed;
-
-            postWindow.ShowDialog();
-        }
-
-        async void postWindow_Closed(object sender, EventArgs e) {
-
-            await bindListBoxData();
-        }
-
-        private async void Button_Click_3(object sender, RoutedEventArgs e) {
-
-            var car = (Car)listBox1.SelectedValue;
-
-            if (car != null)
-                await deleteCar(car);
         }
 
         private void listBox1_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -64,6 +35,49 @@ namespace WPFClientApplication {
 
             if (!btnPut.IsEnabled)
                 btnPut.IsEnabled = true;
+        }
+
+        private async void btnGet_Click(object sender, RoutedEventArgs e) {
+
+            await bindListBoxData();
+        }
+
+        private async void btnDelete_Click(object sender, RoutedEventArgs e) {
+
+            var car = (Car)listBox1.SelectedValue;
+            if (car != null) { 
+                var msgResult = MessageBox.Show("Do you really would like to delete the record?", "Are you sure?", MessageBoxButton.YesNo);
+                if (msgResult == MessageBoxResult.Yes) { 
+                    await deleteCar(car);
+                }
+            }
+        }
+
+        private void btnPost_Click(object sender, RoutedEventArgs e) {
+
+            var postWindow = new PostWindow();
+            postWindow.Closed += postWindow_Closed;
+            postWindow.ShowDialog();
+        }
+        async void postWindow_Closed(object sender, EventArgs e) {
+
+            await bindListBoxData();
+        }
+
+        private void btnPut_Click(object sender, RoutedEventArgs e) {
+
+            var car = (Car)listBox1.SelectedValue;
+            if (car != null) {
+
+                var putWindow = new PutWindow();
+                putWindow.Closed += putWindow_Closed;
+                putWindow.DataContext = car;
+                putWindow.ShowDialog();
+            }
+        }
+        async void putWindow_Closed(object sender, EventArgs e) {
+
+            await bindListBoxData();
         }
 
         //private helpers
@@ -76,7 +90,7 @@ namespace WPFClientApplication {
                     new MediaTypeWithQualityHeaderValue("application/json")
                 );
 
-                var response = await httpClient.GetAsync(baseAPIAddress);
+                var response = await httpClient.GetAsync(Constants.BASE_API_ADDRESS);
                 var content = await response.Content.ReadAsAsync<IEnumerable<Car>>();
 
                 return content;
@@ -88,7 +102,7 @@ namespace WPFClientApplication {
             using (HttpClient httpClient = new HttpClient()) {
 
                 var response = await httpClient.DeleteAsync(
-                    string.Format("{0}/{1}", baseAPIAddress, car.Id)
+                    string.Format("{0}/{1}", Constants.BASE_API_ADDRESS, car.Id)
                 );
 
                 try {
@@ -104,9 +118,7 @@ namespace WPFClientApplication {
                         )
                     );
                 }
-
             }
-
         }
 
         private async Task bindListBoxData() {

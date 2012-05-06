@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleAPIApplication", "SampleAPIApplication\SampleAPIApplication.csproj", "{C8093BA5-4689-4586-BF9E-F33118B1D755}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFClientApplication", "WPFClientApplication\WPFClientApplication.csproj", "{12298A89-E138-4E36-89D5-2F817742BB4F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12298A89-E138-4E36-89D5-2F817742BB4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12298A89-E138-4E36-89D5-2F817742BB4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12298A89-E138-4E36-89D5-2F817742BB4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12298A89-E138-4E36-89D5-2F817742BB4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8093BA5-4689-4586-BF9E-F33118B1D755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8093BA5-4689-4586-BF9E-F33118B1D755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8093BA5-4689-4586-BF9E-F33118B1D755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8093BA5-4689-4586-BF9E-F33118B1D755}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

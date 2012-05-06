@@ -91,8 +91,9 @@ namespace WPFClientApplication {
                 );
 
                 var response = await httpClient.GetAsync(Constants.BASE_API_ADDRESS);
-                var content = await response.Content.ReadAsAsync<IEnumerable<Car>>();
 
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsAsync<IEnumerable<Car>>();
                 return content;
             }
         }
@@ -123,8 +124,19 @@ namespace WPFClientApplication {
 
         private async Task bindListBoxData() {
 
-            var cars = await getCars();
-            listBox1.ItemsSource = cars;
+            try {
+
+                var cars = await getCars();
+                listBox1.ItemsSource = cars;
+
+            } catch (Exception ex) {
+
+                MessageBox.Show(
+                    string.Format(
+                        "The request was not successful. Message: {0}", ex.Message
+                    )
+                );
+            }
         }
     }
 }

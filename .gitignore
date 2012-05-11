@@ -15,7 +15,6 @@ dist
 *.swp
 TestResult.xml
 TestResults
-packages
 
 *.dropbox
 desktop.ini

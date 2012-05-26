@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionFilters", "ExceptionFilters\ExceptionFilters.csproj", "{B5E93785-BF1C-4510-8004-9F4867CDA74E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5AB9B197-9CFC-4075-B47D-10BDE567E6D5}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5E93785-BF1C-4510-8004-9F4867CDA74E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5E93785-BF1C-4510-8004-9F4867CDA74E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5E93785-BF1C-4510-8004-9F4867CDA74E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5E93785-BF1C-4510-8004-9F4867CDA74E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

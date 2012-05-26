@@ -5,10 +5,8 @@ using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
-using Overview.Filters;
-using System.Web.Http.Filters;
 
-namespace Overview {
+namespace ExceptionFilters {
 
     public class Global : System.Web.HttpApplication {
 
@@ -19,8 +17,6 @@ namespace Overview {
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
-            GlobalConfiguration.Configuration.Filters.Add(new LogExceptionAttribute());
         }
     }
 }

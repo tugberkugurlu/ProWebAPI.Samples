@@ -84,9 +84,6 @@
   <ItemGroup>
     <Compile Include="APIs\Cars1Controller.cs" />
     <Compile Include="APIs\Cars2Controller.cs" />
-    <Compile Include="APIs\Cars3Controller.cs" />
-    <Compile Include="Filters\LoggerWithExAttribute.cs" />
-    <Compile Include="Filters\LogExceptionAttribute.cs" />
     <Compile Include="Filters\LoggerAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

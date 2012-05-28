@@ -1,12 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionFilters", "ExceptionFilters\ExceptionFilters.csproj", "{9B571683-F292-48B9-B4FC-AC1E3CB5704D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4000193C-E851-4E5F-9B26-F82EF3EA9D6F}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionFilters", "ExceptionFilters\ExceptionFilters.csproj", "{D03B33FC-44E9-4681-8B05-A1B903747B75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9B571683-F292-48B9-B4FC-AC1E3CB5704D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B571683-F292-48B9-B4FC-AC1E3CB5704D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B571683-F292-48B9-B4FC-AC1E3CB5704D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B571683-F292-48B9-B4FC-AC1E3CB5704D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D03B33FC-44E9-4681-8B05-A1B903747B75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D03B33FC-44E9-4681-8B05-A1B903747B75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D03B33FC-44E9-4681-8B05-A1B903747B75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D03B33FC-44E9-4681-8B05-A1B903747B75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

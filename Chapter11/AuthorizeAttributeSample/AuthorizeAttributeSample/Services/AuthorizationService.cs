@@ -9,8 +9,16 @@ namespace AuthorizeAttributeSample.Services {
     public class AuthorizationService : IAuthorizationService {
 
         private static List<User> users = new List<User>() { 
-            new User { UserName = "tugberk", Email = "tugberk@example.com", Password = "12345678" },
-            new User { UserName = "alex", Email = "alex@example.com", Password = "87654321" }
+            new User { 
+                UserName = "tugberk", 
+                Email = "tugberk@example.com", 
+                Password = "12345678" 
+            },
+            new User { 
+                UserName = "alex", 
+                Email = "alex@example.com", 
+                Password = "87654321" 
+            }
         };
 
         public bool Authorize(string userName, string password) {

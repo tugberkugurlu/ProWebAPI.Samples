@@ -4,9 +4,7 @@
 /// <reference path="../jquery.validate.js" />
 /// <reference path="../jquery.validate.unobtrusive.js" />
 
-﻿var carGallery = carGallery || {};
-
-(function (cg) {
+(function () {
     
     var vm = {};
     var apiBaseAddress = "/api/cars";
@@ -54,6 +52,7 @@
                         vm.cars.push(buidCar(data));
                     });
                 },
+                //Unauthorized
                 401: function() { 
                     vm.isAuthorized(false);
                     openAuthDialogBox();
@@ -106,4 +105,4 @@
         });
     });
 
-}(carGallery));
+}());

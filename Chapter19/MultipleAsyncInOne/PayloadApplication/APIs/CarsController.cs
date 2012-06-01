@@ -9,6 +9,7 @@ namespace PayloadApplication.APIs {
 
         readonly CarsContext _carsContext = new CarsContext();
 
+        [HttpGet]
         public IEnumerable<Car> Cheap() {
 
             Thread.Sleep(1000);
@@ -16,6 +17,7 @@ namespace PayloadApplication.APIs {
             return _carsContext.GetCars(car => car.Price < 50000);
         }
 
+        [HttpGet]
         public IEnumerable<Car> Expensive() {
 
             Thread.Sleep(1000);

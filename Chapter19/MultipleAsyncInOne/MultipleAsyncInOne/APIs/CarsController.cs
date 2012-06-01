@@ -24,6 +24,7 @@ namespace MultipleAsyncInOne.APIs {
 
         readonly HttpClient _httpClient = new HttpClient();
 
+        [HttpGet]
         public async Task<IEnumerable<Car>> AllCars() {
 
             var carsResult = new List<Car>();
@@ -37,6 +38,7 @@ namespace MultipleAsyncInOne.APIs {
             return carsResult;
         }
 
+        [HttpGet]
         public async Task<IEnumerable<Car>> AllCarsInParallel() {
 
             var allTasks = _payloadSources.Select(uri => 

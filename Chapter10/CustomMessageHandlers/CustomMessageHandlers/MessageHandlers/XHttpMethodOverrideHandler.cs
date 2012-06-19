@@ -8,27 +8,27 @@ using System.Web;
 
 namespace CustomMessageHandlers.MessageHandlers
 {
-    public class XHttpMethodOverrideHandler : DelegatingHandler      
-{
-    readonly string[] _methods = { "DELETE", "HEAD", "PUT" };
-    const string XOVERRIDEHEADER = "X-HTTP-Method-Override";
-
-    protected override Task<HttpResponseMessage> SendAsync(
-        HttpRequestMessage request, CancellationToken cancellationToken)
+    public class XHttpMethodOverrideHandler : DelegatingHandler
     {
-        // Check for HTTP POST with the X-HTTP-Method-Override header.
-        if (HttpMethod.Post == request.Method && request.Headers.Contains(XOVERRIDEHEADER))
+        readonly string[] _methods = { "DELETE", "HEAD", "PUT" };
+        const string XOVERRIDEHEADER = "X-HTTP-Method-Override";
+
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            // Check if the header value is in our methods list.
-            var overrideMethod = request.Headers.GetValues(XOVERRIDEHEADER).FirstOrDefault();
-            if (_methods.Contains(overrideMethod, StringComparer.InvariantCultureIgnoreCase))
+            // Check for HTTP POST with the X-HTTP-Method-Override header.
+            if (HttpMethod.Post == request.Method && request.Headers.Contains(XOVERRIDEHEADER))
             {
-                // Change the request method.
-                request.Method = new HttpMethod(overrideMethod);
+                // Check if the header value is in our methods list.
+                var overrideMethod = request.Headers.GetValues(XOVERRIDEHEADER).FirstOrDefault();
+                if (_methods.Contains(overrideMethod, StringComparer.InvariantCultureIgnoreCase))
+                {
+                    // Change the request method.
+                    request.Method = new HttpMethod(overrideMethod);
+                }
             }
+            return base.SendAsync(request, cancellationToken);
         }
-        return base.SendAsync(request, cancellationToken);
     }
-}
 
 }

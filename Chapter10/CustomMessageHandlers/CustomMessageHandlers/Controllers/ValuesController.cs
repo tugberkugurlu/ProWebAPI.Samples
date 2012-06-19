@@ -27,7 +27,7 @@ namespace CustomMessageHandlers.Controllers
         }
 
         // PUT api/values/5
-        public void Put(int id, string value)
+        public void Put(int id, [FromBody]string test)
         {
         }
 

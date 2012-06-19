@@ -16,18 +16,15 @@ namespace CustomMessageHandlers
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
-    public class WebApiApplication : System.Web.HttpApplication
+public class WebApiApplication : System.Web.HttpApplication
+{
+    protected void Application_Start()
     {
-        protected void Application_Start()
-        {
-            AreaRegistration.RegisterAllAreas();
+        RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            GlobalConfiguration.Configuration.MessageHandlers.Add(new XHttpMethodOverrideHandler());
-            GlobalConfiguration.Configuration.MessageHandlers.Add(new XPoweredByHeaderHandler());
-        }
+        var config = GlobalConfiguration.Configuration;
+        config.MessageHandlers.Add(new XHttpMethodOverrideHandler());
+        config.MessageHandlers.Add(new XPoweredByHeaderHandler());
     }
+}
 }

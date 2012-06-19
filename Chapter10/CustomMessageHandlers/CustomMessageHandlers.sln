@@ -8,6 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1FBAD5
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageHandlerRegistrationOrder", "MessageHandlerRegistrationOrder\MessageHandlerRegistrationOrder.csproj", "{66CE6D60-F98F-4ED5-B81F-638265BFE50A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,10 @@ Global
 		{0474DDCE-6C5A-46F7-923E-F36DC6E4D87A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0474DDCE-6C5A-46F7-923E-F36DC6E4D87A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0474DDCE-6C5A-46F7-923E-F36DC6E4D87A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66CE6D60-F98F-4ED5-B81F-638265BFE50A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66CE6D60-F98F-4ED5-B81F-638265BFE50A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66CE6D60-F98F-4ED5-B81F-638265BFE50A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66CE6D60-F98F-4ED5-B81F-638265BFE50A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

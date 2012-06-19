@@ -27,6 +27,7 @@ namespace CustomMessageHandlers
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             GlobalConfiguration.Configuration.MessageHandlers.Add(new XHttpMethodOverrideHandler());
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new XPoweredByHeaderHandler());
         }
     }
 }

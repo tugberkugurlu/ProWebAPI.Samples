@@ -25,6 +25,7 @@ namespace AutofacWebAPISample {
 
             //deal with your dependencies here
             builder.RegisterType<CarsService>().As<ICarsService>();
+            builder.RegisterType<CarsCountService>().As<ICarsCountService>();
 
             return builder.Build();
         }

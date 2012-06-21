@@ -12,6 +12,7 @@ namespace AutofacWebAPISample.APIs {
         private readonly ICarsService _carsService;
 
         public CarsController(ICarsService carsService) {
+
             _carsService = carsService;
         }
 

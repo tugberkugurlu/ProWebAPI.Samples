@@ -95,7 +95,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIs\CarsController.cs" />
+    <Compile Include="APIs\CarsCountController.cs" />
+    <Compile Include="Application\CarsCountService.cs" />
     <Compile Include="Application\CarsService.cs" />
+    <Compile Include="Application\ICarsCountService.cs" />
     <Compile Include="Application\ICarsService.cs" />
     <Compile Include="App_Start\AutofacWebAPI.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />

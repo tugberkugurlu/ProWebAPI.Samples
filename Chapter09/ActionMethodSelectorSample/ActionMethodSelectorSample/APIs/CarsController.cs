@@ -8,12 +8,13 @@ namespace ActionMethodSelectorSample.APIs {
 
     public class CarsController : ApiController {
 
-        public string[] Cars() {
+        public string[] Get() {
 
-            return cars();
+            return GetCars();
         }
 
-        private string[] cars() {
+        [NonAction]
+        public string[] GetCars() {
 
             return new string[] { 
                 "Car 1",

@@ -27,10 +27,13 @@ namespace FirstIHttpController.APIs {
                 "Car 3"
             };
 
-            return Task.Factory.StartNew<HttpResponseMessage>(() => {
+            var response = 
+                controllerContext.Request.CreateResponse(HttpStatusCode.OK, cars);
 
-                return controllerContext.Request.CreateResponse(HttpStatusCode.OK, cars);
-            });
+            var tcs = new TaskCompletionSource<HttpResponseMessage>();
+            tcs.SetResult(response);
+
+            return tcs.Task;
         }
     }
 }

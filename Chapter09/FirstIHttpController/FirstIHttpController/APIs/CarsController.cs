@@ -15,10 +15,14 @@ namespace FirstIHttpController.APIs {
         public Task<HttpResponseMessage> ExecuteAsync(HttpControllerContext controllerContext, CancellationToken cancellationToken) {
 
             if (controllerContext.Request.Method != HttpMethod.Get) {
-                return Task.Factory.StartNew<HttpResponseMessage>(() => {
 
-                    return new HttpResponseMessage(HttpStatusCode.NotFound);
-                });
+                var notAllowedResponse = 
+                    new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
+
+                var notAllowedTcs = new TaskCompletionSource<HttpResponseMessage>();
+                notAllowedTcs.SetResult(notAllowedResponse);
+
+                return notAllowedTcs.Task;
             }
             
             var cars = new[] { 

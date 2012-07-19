@@ -12,23 +12,30 @@ namespace SkippedActionFilters.Filters {
 
         private const string _loggerName = "SecondaryLogger";
 
-        public override void OnActionExecuting(HttpActionContext actionContext) {
+        public override void OnActionExecuting(
+            HttpActionContext actionContext) {
+
+            var controllerCtx = actionContext.ControllerContext;
 
             LoggerUtils.WriteLog(
                 _loggerName,
                 "OnActionExecuting",
-                actionContext.ControllerContext.ControllerDescriptor.ControllerName,
+                controllerCtx.ControllerDescriptor.ControllerName,
                 actionContext.ActionDescriptor.ActionName
             );
         }
 
-        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext) {
+        public override void OnActionExecuted(
+            HttpActionExecutedContext actionExecutedContext) {
+
+            var actionCtx = actionExecutedContext.ActionContext;
+            var controllerCtx = actionCtx.ControllerContext;
 
             LoggerUtils.WriteLog(
                 _loggerName,
                 "OnActionExecuted",
-                actionExecutedContext.ActionContext.ControllerContext.ControllerDescriptor.ControllerName,
-                actionExecutedContext.ActionContext.ActionDescriptor.ActionName
+                controllerCtx.ControllerDescriptor.ControllerName,
+                actionCtx.ActionDescriptor.ActionName
             );
         }
     }

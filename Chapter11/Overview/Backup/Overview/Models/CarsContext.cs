@@ -28,7 +28,7 @@ namespace Overview.Models {
             new Car { Id = 8, Make = "Make8", Model = "Model1", Year = 2011, Price = 1823223.23F }
         };
 
-        public IEnumerable<Car> All {
+        public IEnumerable<Car> All { 
             get {
                 return cars;
             }
@@ -67,7 +67,7 @@ namespace Overview.Models {
 
             var index = cars.FindIndex(x => x.Id == id);
 
-            if (index >= 0) {
+            if (index > 0) {
 
                 cars[index] = car;
                 return true;

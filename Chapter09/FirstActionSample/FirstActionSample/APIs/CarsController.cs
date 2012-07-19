@@ -29,10 +29,7 @@ namespace FirstActionSample.APIs {
 
             if (!_carsCtx.TryUpdate(id, car)) {
 
-                var response = new HttpResponseMessage(HttpStatusCode.NotFound) {
-                    Content = new StringContent("Car not found")
-                };
-
+                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
                 throw new HttpResponseException(response);
             }
 
@@ -45,10 +42,7 @@ namespace FirstActionSample.APIs {
 
             if (car == null) {
 
-                var response = new HttpResponseMessage(HttpStatusCode.NotFound) {
-                    Content = new StringContent("Car not found")
-                };
-
+                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
                 throw new HttpResponseException(response);
             }
 

@@ -13,7 +13,8 @@ namespace TCSCachesInsideMessageHandlers {
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) {
 
-            return CachedResponseMessageItemStore.BadRequestResponseMessage;
+            var badRequestResponse = CachedResponseMessageItemStore.BadRequestResponseMessage;
+            return badRequestResponse;
         }
 
         private static class CachedResponseMessageItemStore {

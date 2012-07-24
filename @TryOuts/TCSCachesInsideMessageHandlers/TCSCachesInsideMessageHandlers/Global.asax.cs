@@ -14,6 +14,7 @@ namespace TCSCachesInsideMessageHandlers {
 
             GlobalConfiguration.Configuration.Routes.MapHttpRoute("Default", "api/{controller}");
             GlobalConfiguration.Configuration.MessageHandlers.Add(new EverythingIsEvilHandler());
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new MyFirstHandler());
         }
     }
 }

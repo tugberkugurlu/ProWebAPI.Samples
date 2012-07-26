@@ -19,7 +19,8 @@ namespace TimeoutHandlerSample {
                 "api/{controller}"
             );
             config.MessageHandlers.Add(new LoggerHandler());
-            config.MessageHandlers.Add(new TimeoutHandler());
+            //config.MessageHandlers.Add(new TimeoutHandler());
+            config.MessageHandlers.Add(new DotNet4TimeoutHandler(300));
         }
     }
 }

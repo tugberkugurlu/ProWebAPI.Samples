@@ -89,6 +89,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MessageHandlers\DotNet4TimeoutHandler.cs" />
     <Compile Include="MessageHandlers\LoggerHandler.cs" />
     <Compile Include="MessageHandlers\TimeoutHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

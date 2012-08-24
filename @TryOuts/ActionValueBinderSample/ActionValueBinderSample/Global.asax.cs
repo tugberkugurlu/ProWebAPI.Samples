@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Controllers;
 using System.Web.Security;
 using System.Web.SessionState;
-using TimeoutHandlerSample.MessageHandlers;
 
-namespace TimeoutHandlerSample {
+namespace ActionValueBinderSample {
 
     public class Global : System.Web.HttpApplication {
 
@@ -18,9 +18,6 @@ namespace TimeoutHandlerSample {
                 "DefaultHttpRoute",
                 "api/{controller}"
             );
-            config.MessageHandlers.Add(new LoggerHandler());
-            //config.MessageHandlers.Add(new TimeoutHandler());
-            config.MessageHandlers.Add(new DotNet4TimeoutHandler(300));
         }
     }
 }

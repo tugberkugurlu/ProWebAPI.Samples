@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Http;
 using ReturningHttpResponseMessageWithObjSample.Models;
 
-namespace ReturningHttpResponseMessageWithObjSample.APIs {
+namespace ReturningHttpResponseMessageWithObjSample.Controllers {
 
     public class CarsController : ApiController {
 

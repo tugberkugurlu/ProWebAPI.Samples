@@ -14,10 +14,12 @@ namespace SkippedActionFilters.Filters {
         public override void OnActionExecuting(
             HttpActionContext actionContext) {
 
-            LoggerUtils.WriteLog(
+            var controllerCtx = actionContext.ControllerContext;
+
+            LoggerUtil.WriteLog(
                 _loggerName,
                 "OnActionExecuting",
-                actionContext.ControllerContext.ControllerDescriptor.ControllerName,
+                controllerCtx.ControllerDescriptor.ControllerName,
                 actionContext.ActionDescriptor.ActionName
             );
         }
@@ -28,7 +30,7 @@ namespace SkippedActionFilters.Filters {
             var actionCtx = actionExecutedContext.ActionContext;
             var controllerCtx = actionCtx.ControllerContext;
 
-            LoggerUtils.WriteLog(
+            LoggerUtil.WriteLog(
                 _loggerName,
                 "OnActionExecuted",
                 controllerCtx.ControllerDescriptor.ControllerName,

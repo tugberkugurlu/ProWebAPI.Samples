@@ -10,7 +10,7 @@ namespace ExceptionFilterOrdering.Filters {
 
         public override void OnException(HttpActionExecutedContext actionExecutedContext) {
 
-            ExLoggerUtils.WriteLog(
+            ExLoggerUtil.WriteLog(
                 "SecondaryExceptionLogger",
                 actionExecutedContext.ActionContext.ControllerContext.ControllerDescriptor.ControllerName,
                 actionExecutedContext.ActionContext.ActionDescriptor.ActionName,

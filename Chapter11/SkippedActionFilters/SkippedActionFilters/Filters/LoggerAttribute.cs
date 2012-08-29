@@ -14,23 +14,27 @@ namespace SkippedActionFilters.Filters {
 
         private const string _loggerName = "Logger";
 
-        public override void OnActionExecuting(HttpActionContext actionContext) {
+        public override void OnActionExecuting(
+            HttpActionContext actionContext) {
 
-            throw new Exception();
-
-            //terminate the request by set a new response to actionContext.Response
+            //terminate the request by set a new response 
+            //to actionContext.Response
             actionContext.Response = new HttpResponseMessage(
                 HttpStatusCode.NotFound
             );
         }
 
-        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext) {
+        public override void OnActionExecuted(
+            HttpActionExecutedContext actionExecutedContext) {
 
-            LoggerUtils.WriteLog(
+            var actionCtx = actionExecutedContext.ActionContext;
+            var controllerCtx = actionCtx.ControllerContext;
+
+            LoggerUtil.WriteLog(
                 _loggerName,
                 "OnActionExecuted",
-                actionExecutedContext.ActionContext.ControllerContext.ControllerDescriptor.ControllerName,
-                actionExecutedContext.ActionContext.ActionDescriptor.ActionName
+                controllerCtx.ControllerDescriptor.ControllerName,
+                actionCtx.ActionDescriptor.ActionName
             );
         }
     }

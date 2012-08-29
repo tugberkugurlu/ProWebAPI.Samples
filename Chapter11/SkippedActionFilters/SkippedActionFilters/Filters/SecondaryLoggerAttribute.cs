@@ -17,7 +17,7 @@ namespace SkippedActionFilters.Filters {
 
             var controllerCtx = actionContext.ControllerContext;
 
-            LoggerUtils.WriteLog(
+            LoggerUtil.WriteLog(
                 _loggerName,
                 "OnActionExecuting",
                 controllerCtx.ControllerDescriptor.ControllerName,
@@ -31,7 +31,7 @@ namespace SkippedActionFilters.Filters {
             var actionCtx = actionExecutedContext.ActionContext;
             var controllerCtx = actionCtx.ControllerContext;
 
-            LoggerUtils.WriteLog(
+            LoggerUtil.WriteLog(
                 _loggerName,
                 "OnActionExecuted",
                 controllerCtx.ControllerDescriptor.ControllerName,

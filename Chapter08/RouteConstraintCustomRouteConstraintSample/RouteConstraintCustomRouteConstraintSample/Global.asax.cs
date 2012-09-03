@@ -19,7 +19,7 @@ namespace RouteConstraintCustomRouteConstraintSample {
                 "DefaultHttpRoute",
                 "api/{controller}/{id}",
                 new { id = RouteParameter.Optional },
-                new { id = new DefaultHttpRouteIdConstraint() }
+                new { id = new OptionalRegExConstraint(@"\d+") }
             );
         }
     }

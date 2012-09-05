@@ -1,18 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomMessageHandlers", "CustomMessageHandlers\CustomMessageHandlers.csproj", "{0474DDCE-6C5A-46F7-923E-F36DC6E4D87A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomMessageHandlers", "CustomMessageHandlers\CustomMessageHandlers.csproj", "{B2560A6E-9F15-4FDF-95FB-80D6229184CA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1FBAD51A-45DC-4929-98AE-8959DAEB495E}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyRequestPipelineMessageHandler", "EmptyRequestPipelineMessageHandler\EmptyRequestPipelineMessageHandler.csproj", "{A4BF1C63-EDA4-4E68-9AD8-1BFC4B0D21A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageHandlerRegistrationOrder", "MessageHandlerRegistrationOrder\MessageHandlerRegistrationOrder.csproj", "{66CE6D60-F98F-4ED5-B81F-638265BFE50A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageHandlerRegistrationOrder", "MessageHandlerRegistrationOrder\MessageHandlerRegistrationOrder.csproj", "{AB8BE46E-17E8-4F14-B36D-A5FC5FF82474}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageHandlerSelfHostConfiguration", "MessageHandlerSelfHostConfiguration\MessageHandlerSelfHostConfiguration.csproj", "{77982FF5-28BC-4C26-AB38-2DD924D9BB63}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbortRequestPipelineMessageHandler", "AbortRequestPipelineMessageHandler\AbortRequestPipelineMessageHandler.csproj", "{6CB5C76B-2880-42EA-B03F-96FE2490B0C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageHandlerSelfHostConfiguration", "MessageHandlerSelfHostConfiguration\MessageHandlerSelfHostConfiguration.csproj", "{DC5EFA87-80A4-4CEB-AF9B-9E506526D4EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,22 +15,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0474DDCE-6C5A-46F7-923E-F36DC6E4D87A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0474DDCE-6C5A-46F7-923E-F36DC6E4D87A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0474DDCE-6C5A-46F7-923E-F36DC6E4D87A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0474DDCE-6C5A-46F7-923E-F36DC6E4D87A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{66CE6D60-F98F-4ED5-B81F-638265BFE50A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{66CE6D60-F98F-4ED5-B81F-638265BFE50A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{66CE6D60-F98F-4ED5-B81F-638265BFE50A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{66CE6D60-F98F-4ED5-B81F-638265BFE50A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6CB5C76B-2880-42EA-B03F-96FE2490B0C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6CB5C76B-2880-42EA-B03F-96FE2490B0C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6CB5C76B-2880-42EA-B03F-96FE2490B0C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6CB5C76B-2880-42EA-B03F-96FE2490B0C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{77982FF5-28BC-4C26-AB38-2DD924D9BB63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{77982FF5-28BC-4C26-AB38-2DD924D9BB63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{77982FF5-28BC-4C26-AB38-2DD924D9BB63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{77982FF5-28BC-4C26-AB38-2DD924D9BB63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2560A6E-9F15-4FDF-95FB-80D6229184CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2560A6E-9F15-4FDF-95FB-80D6229184CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2560A6E-9F15-4FDF-95FB-80D6229184CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2560A6E-9F15-4FDF-95FB-80D6229184CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4BF1C63-EDA4-4E68-9AD8-1BFC4B0D21A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4BF1C63-EDA4-4E68-9AD8-1BFC4B0D21A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4BF1C63-EDA4-4E68-9AD8-1BFC4B0D21A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4BF1C63-EDA4-4E68-9AD8-1BFC4B0D21A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB8BE46E-17E8-4F14-B36D-A5FC5FF82474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB8BE46E-17E8-4F14-B36D-A5FC5FF82474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB8BE46E-17E8-4F14-B36D-A5FC5FF82474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB8BE46E-17E8-4F14-B36D-A5FC5FF82474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC5EFA87-80A4-4CEB-AF9B-9E506526D4EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC5EFA87-80A4-4CEB-AF9B-9E506526D4EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC5EFA87-80A4-4CEB-AF9B-9E506526D4EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC5EFA87-80A4-4CEB-AF9B-9E506526D4EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

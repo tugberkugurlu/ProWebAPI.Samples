@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>jQuery JSONP Client</title>
+    <script src="Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            jQuery.getJSON("http://localhost:1051/api/car/1/jsonp?callback=?",
+                function (car) {
+                    alert("Make: " + car.Make);
+                });
+        });
+    </script>
+</body>
+</html>

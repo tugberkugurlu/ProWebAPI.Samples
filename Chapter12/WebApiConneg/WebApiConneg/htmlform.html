@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        label
+        {
+            display: block;
+        }
+
+        fieldset
+        {
+            width: 170px;
+        }
+    </style>
+</head>
+<body>
+    <form action="/api/car" method="post">
+    <fieldset>
+        <legend>New Car</legend>
+        <label for="Make">Make:</label>
+        <input type="text" name="Make" />
+        <label for="Model">Model:</label>
+        <input type="text" name="Model" />
+        <label for="Year">Year:</label>
+        <input type="text" name="Year" />
+        <label for="Price">Price:</label>
+        <input type="text" name="Price" />
+        <input type="submit" />
+    </fieldset>
+    </form>
+</body>
+</html>

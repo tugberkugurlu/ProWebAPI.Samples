@@ -8,7 +8,8 @@ using System.Diagnostics;
 
 namespace Overview.Filters {
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method)]
     public class LoggerAttribute : Attribute, IActionFilter {
 
         public Task<HttpResponseMessage> ExecuteActionFilterAsync(
@@ -16,12 +17,12 @@ namespace Overview.Filters {
             CancellationToken cancellationToken, 
             Func<Task<HttpResponseMessage>> continuation) {
 
+            var controllerCtx = actionContext.ControllerContext;
+
             Trace.TraceInformation(
-                string.Format(
-                    "Controller {0}, Action {1} is running...", 
-                    actionContext.ControllerContext.ControllerDescriptor.ControllerName, 
-                    actionContext.ActionDescriptor.ActionName
-                )
+                "Controller {0}, Action {1} is running...",
+                controllerCtx.ControllerDescriptor.ControllerName, 
+                actionContext.ActionDescriptor.ActionName
             );
 
             //the way of saying everything is OK

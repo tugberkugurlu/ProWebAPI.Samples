@@ -11,23 +11,30 @@ namespace SkippedActionFilters.Filters {
 
         private const string _loggerName = "GlobalLogger";
 
-        public override void OnActionExecuting(HttpActionContext actionContext) {
+        public override void OnActionExecuting(
+            HttpActionContext actionContext) {
 
-            LoggerUtils.WriteLog(
+            var controllerCtx = actionContext.ControllerContext;
+
+            LoggerUtil.WriteLog(
                 _loggerName,
                 "OnActionExecuting",
-                actionContext.ControllerContext.ControllerDescriptor.ControllerName,
+                controllerCtx.ControllerDescriptor.ControllerName,
                 actionContext.ActionDescriptor.ActionName
             );
         }
 
-        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext) {
+        public override void OnActionExecuted(
+            HttpActionExecutedContext actionExecutedContext) {
 
-            LoggerUtils.WriteLog(
+            var actionCtx = actionExecutedContext.ActionContext;
+            var controllerCtx = actionCtx.ControllerContext;
+
+            LoggerUtil.WriteLog(
                 _loggerName,
                 "OnActionExecuted",
-                actionExecutedContext.ActionContext.ControllerContext.ControllerDescriptor.ControllerName,
-                actionExecutedContext.ActionContext.ActionDescriptor.ActionName
+                controllerCtx.ControllerDescriptor.ControllerName,
+                actionCtx.ActionDescriptor.ActionName
             );
         }
     }

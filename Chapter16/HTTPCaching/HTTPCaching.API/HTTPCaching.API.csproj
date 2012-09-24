@@ -80,10 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CarsController.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MessageHandlers\ETagHandler.cs" />
+    <Compile Include="MessageHandlers\CachableEntity.cs" />
+    <Compile Include="MessageHandlers\HttpCachingHandler.cs" />
     <Compile Include="Models\CarsContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

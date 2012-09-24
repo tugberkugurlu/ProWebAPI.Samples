@@ -1,5 +1,6 @@
 ﻿using HTTPCaching.API.MessageHandlers;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,7 +21,20 @@ namespace HTTPCaching.API {
                 new { id = RouteParameter.Optional }
             );
 
-            config.MessageHandlers.Add(new ETagHandler());
+            var eTagHandler = new HttpCachingHandler("Accept", "Accept-Charset");
+            eTagHandler.CacheInvalidationStore.Add(requestUri => {
+
+                if (requestUri.StartsWith(
+                    "/api/cars/",
+                    StringComparison.InvariantCultureIgnoreCase)) {
+
+                    return new[] { "/api/cars" };
+                }
+
+                return new string[0];
+            });
+
+            config.MessageHandlers.Insert(0, eTagHandler);
         }
     }
 }

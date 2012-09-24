@@ -25,12 +25,12 @@ namespace DataAnnotationValidationAttributesSample {
 
             config.Services.RemoveAll(
                 typeof(ModelValidatorProvider),
-                validator => !(validator is DataAnnotationsModelValidatorProvider));
+                validator => (validator is InvalidModelValidatorProvider));
 
             // Suppressing the IRequiredMemberSelector for all formatters
-            //foreach (var formatter in config.Formatters) {
-            //    formatter.RequiredMemberSelector = new SuppressedRequiredMemberSelector();
-            //}
+            foreach (var formatter in config.Formatters) {
+                formatter.RequiredMemberSelector = new SuppressedRequiredMemberSelector();
+            }
         }
     }
 }

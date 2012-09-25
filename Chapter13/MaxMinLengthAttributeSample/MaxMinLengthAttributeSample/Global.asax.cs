@@ -8,7 +8,7 @@ using System.Web.Http.Validation.Providers;
 using System.Web.Security;
 using System.Web.SessionState;
 
-namespace EmailAddressAttributeSample {
+namespace MaxMinLengthAttributeSample {
 
     public class Global : HttpApplication {
 

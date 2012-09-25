@@ -20,7 +20,8 @@ namespace RangeAttributeSample.Models {
         [Range(minimum: 0F, maximum: 500000F)]
         public float Price { get; set; }
 
-        [Range(typeof(DateTime), "2010-01-01", "9999-12-31")]
+        [Range(type: typeof(DateTime), 
+            minimum: "2010-01-01", maximum: "9999-12-31")]
         public DateTime PurchasedOn { get; set; }
     }
 }

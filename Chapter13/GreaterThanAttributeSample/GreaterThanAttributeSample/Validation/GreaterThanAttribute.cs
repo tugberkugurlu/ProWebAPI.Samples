@@ -37,11 +37,13 @@ namespace GreaterThanAttributeSample.Validation {
                 OtherProperty);
         }
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext) {
+        protected override ValidationResult IsValid(
+            object value, ValidationContext validationContext) {
 
             IComparable firstValue = value as IComparable;
             IComparable secondValue = GetSecondValue(
-                validationContext.ObjectType, validationContext.ObjectInstance);
+                validationContext.ObjectType, 
+                validationContext.ObjectInstance);
 
             if (firstValue == null || secondValue == null) {
 
@@ -52,7 +54,8 @@ namespace GreaterThanAttributeSample.Validation {
             if (firstValue.CompareTo(secondValue) < 1) { 
 
                 return new ValidationResult(
-                    this.FormatErrorMessage(validationContext.DisplayName));
+                    this.FormatErrorMessage(
+                        validationContext.DisplayName));
             }
 
             return ValidationResult.Success;
@@ -67,7 +70,8 @@ namespace GreaterThanAttributeSample.Validation {
 
                 throw new Exception(
                     string.Format(
-                        "The property named {0} does not exist.", this.OtherProperty));
+                        "The property named {0} does not exist.", 
+                        this.OtherProperty));
             }
 
             var value = propertyInfo.GetValue(instance, null);

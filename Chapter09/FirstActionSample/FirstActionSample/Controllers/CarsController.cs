@@ -13,55 +13,60 @@ namespace FirstActionSample.Controllers {
 
         private readonly CarsContext _carsCtx = new CarsContext();
 
+        // GET /api/cars
         public IEnumerable<Car> Get() {
 
-            var cars = _carsCtx.All;
-            return cars;
+            return _carsCtx.All;
         }
 
-        public HttpResponseMessage PostCar(Car car) {
-
-            _carsCtx.Add(car);
-            return new HttpResponseMessage(HttpStatusCode.Created);
-        }
-
-        public Car PutCar(int id, Car car) {
-
-            if (!_carsCtx.TryUpdate(id, car)) {
-
-                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
-                throw new HttpResponseException(response);
-            }
-
-            return car;
-        }
-
-        public HttpResponseMessage DeleteCar(int id) {
-
-            var car = _carsCtx.GetSingle(x => x.Id == id);
-
-            if (car == null) {
-
-                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
-                throw new HttpResponseException(response);
-            }
-
-            _carsCtx.Delete(car);
-            return new HttpResponseMessage(HttpStatusCode.OK);
-        }
-
-        //Second GET method
+        // GET /api/cars/{id}
         public Car GetCar(int id) {
 
-            var car = _carsCtx.GetSingle(x => x.Id == id);
+            var carTuple = _carsCtx.GetSingle(id);
 
-            if (car == null) {
+            if (!carTuple.Item1) {
 
-                var response = new HttpResponseMessage(HttpStatusCode.NotFound);
+                var response = Request.CreateResponse(HttpStatusCode.NotFound);
+                throw new HttpResponseException(response);
+            }
+
+            return carTuple.Item2;
+        }
+
+        // POST /api/cars
+        public HttpResponseMessage PostCar(Car car) {
+
+            var createdCar = _carsCtx.Add(car);
+            var response = Request.CreateResponse(HttpStatusCode.Created, createdCar);
+            response.Headers.Location = new Uri(
+                Url.Link("DefaultHttpRoute", new { id = createdCar.Id }));
+
+            return response;
+        }
+
+        // PUT /api/cars/{id}
+        public Car PutCar(int id, Car car) {
+
+            car.Id = id;
+            if (!_carsCtx.TryUpdate(car)) {
+
+                var response = Request.CreateResponse(HttpStatusCode.NotFound);
                 throw new HttpResponseException(response);
             }
 
             return car;
+        }
+
+        // DELETE /api/cars/{id}
+        public HttpResponseMessage DeleteCar(int id) {
+
+            if (!_carsCtx.TryRemove(id)) {
+
+                var response = Request.CreateResponse(HttpStatusCode.NotFound);
+                throw new HttpResponseException(response);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

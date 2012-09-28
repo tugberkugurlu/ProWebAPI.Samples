@@ -23,8 +23,8 @@ namespace LinkedCancellationTokenSample {
                 Console.WriteLine("Elapsed time: {0}ms", watch.Elapsed.TotalMilliseconds);
                 watch.Stop();
 
-                //We get back the response. 
-                //So, dispose the CancellationTokenSource 
+                //We get the response. 
+                //Dispose of the CancellationTokenSource
                 //so that it is not going to signal.
                 cts.Dispose();
 
@@ -34,10 +34,10 @@ namespace LinkedCancellationTokenSample {
                 }
                 else if (task.Status == TaskStatus.Canceled) {
 
-                    Console.WriteLine("The task has been cancelled.");
+                    Console.WriteLine("The task has been canceled.");
                 }
                 else {
-                    Console.WriteLine("An error has been occured. Details:");
+                    Console.WriteLine("An error has been occurred. Details:");
                     Console.WriteLine(task.Exception.InnerException.Message);
                 }
             });

@@ -19,10 +19,7 @@ namespace FirstIHttpController.Controllers {
                 var notAllowedResponse = 
                     new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
 
-                var notAllowedTcs = new TaskCompletionSource<HttpResponseMessage>();
-                notAllowedTcs.SetResult(notAllowedResponse);
-
-                return notAllowedTcs.Task;
+                return Task.FromResult(notAllowedResponse);
             }
             
             var cars = new[] { 
@@ -34,10 +31,7 @@ namespace FirstIHttpController.Controllers {
             var response = 
                 controllerContext.Request.CreateResponse(HttpStatusCode.OK, cars);
 
-            var tcs = new TaskCompletionSource<HttpResponseMessage>();
-            tcs.SetResult(response);
-
-            return tcs.Task;
+            return Task.FromResult(response);
         }
     }
 }

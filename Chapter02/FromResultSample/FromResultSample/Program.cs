@@ -26,10 +26,10 @@ namespace FromResultSample {
                     }
                     else if (task.Status == TaskStatus.Canceled) {
 
-                        Console.WriteLine("The task has been cancelled.");
+                        Console.WriteLine("The task has been canceled.");
                     }
                     else {
-                        Console.WriteLine("An error has been occured. Details:");
+                        Console.WriteLine("An error has been occurred. Details:");
                         Console.WriteLine(task.Exception.InnerException.Message);
                     }
                 });

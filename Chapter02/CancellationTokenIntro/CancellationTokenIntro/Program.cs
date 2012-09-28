@@ -16,8 +16,8 @@ namespace CancellationTokenIntro {
 
             AsyncFactory.GetIntAsync(cts.Token).ContinueWith((task) => {
 
-                //We get back the response. 
-                //So, dispose the CancellationTokenSource 
+                //We get the response. 
+                //So dispose the CancellationTokenSource 
                 //so that it is not going to signal.
                 cts.Dispose();
 
@@ -27,10 +27,10 @@ namespace CancellationTokenIntro {
                 }
                 else if (task.Status == TaskStatus.Canceled) {
 
-                    Console.WriteLine("The task has been cancelled.");
+                    Console.WriteLine("The task has been canceled.");
                 }
                 else {
-                    Console.WriteLine("An error has been occured. Details:");
+                    Console.WriteLine("An error has been occurred. Details:");
                     Console.WriteLine(task.Exception.InnerException.Message);
                 }
             });

@@ -24,7 +24,7 @@ namespace CompositionContinueWhenAll {
 
             Task.Factory.ContinueWhenAll(new[] { twitterTask, googleTask }, (tasks) => {
 
-                //all of the tasks has been completed. 
+                //all of the tasks have been completed. 
                 //Reaching out to the Result property will not block.
 
                 foreach (var task in tasks) {
@@ -35,10 +35,10 @@ namespace CompositionContinueWhenAll {
                     }
                     else if (task.Status == TaskStatus.Canceled) {
 
-                        Console.WriteLine("The task has been cancelled. ID: {0}", task.Id);
+                        Console.WriteLine("The task has been canceled. ID: {0}", task.Id);
                     }
                     else {
-                        Console.WriteLine("An error has been occured. Details:");
+                        Console.WriteLine("An error has been occurred. Details:");
                         Console.WriteLine(task.Exception.InnerException.Message);
                     }
                 }

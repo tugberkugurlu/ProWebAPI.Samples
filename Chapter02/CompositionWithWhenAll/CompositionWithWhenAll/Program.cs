@@ -25,7 +25,7 @@ namespace CompositionWithWhenAll {
 
             task.ContinueWith(stringArray => {
 
-                //all of the tasks has been completed. 
+                //all of the tasks have been completed. 
                 //Reaching out to the Result property will not block.
 
                 if (task.Status == TaskStatus.RanToCompletion) {
@@ -37,10 +37,10 @@ namespace CompositionWithWhenAll {
                 }
                 else if (task.Status == TaskStatus.Canceled) {
 
-                    Console.WriteLine("The task has been cancelled. ID: {0}", task.Id);
+                    Console.WriteLine("The task has been canceled. ID: {0}", task.Id);
                 }
                 else {
-                    Console.WriteLine("An error has been occured. Details:");
+                    Console.WriteLine("An error has been occurred. Details:");
                     foreach (var ex in task.Exception.InnerExceptions) {
                         Console.WriteLine(ex.Message);
                     }

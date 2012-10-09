@@ -22,10 +22,10 @@ namespace EmailAddressAttributeSample.APIs {
         // POST /api/people
         public HttpResponseMessage PostPerson(Person person) {
 
-            var createdCar = _peopleCtx.Add(person);
-            var response = Request.CreateResponse(HttpStatusCode.Created, createdCar);
+            var createdPerson = _peopleCtx.Add(person);
+            var response = Request.CreateResponse(HttpStatusCode.Created, createdPerson);
             response.Headers.Location = new Uri(
-                Url.Link("DefaultHttpRoute", new { id = createdCar.Id }));
+                Url.Link("DefaultHttpRoute", new { id = createdPerson.Id }));
 
             return response;
         }

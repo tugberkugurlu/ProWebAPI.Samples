@@ -58,16 +58,5 @@ namespace MultipleAsyncInOne.APIs {
 
             return content;
         }
-
-        //dispose the _httpClient
-        protected override void Dispose(bool disposing) {
-
-            if (disposing) {
-
-                _httpClient.Dispose();
-            }
-
-            base.Dispose(disposing);
-        }
     }
 }

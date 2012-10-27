@@ -15,8 +15,8 @@ namespace HTTPCaching.API.MessageHandlers {
 
     public class HttpCachingHandler : DelegatingHandler {
 
-        private static ConcurrentDictionary<string, CachableEntity> _eTagCacheDictionary = 
-                new ConcurrentDictionary<string, CachableEntity>();
+        private static ConcurrentDictionary<string, CacheableEntity> _eTagCacheDictionary = 
+                new ConcurrentDictionary<string, CacheableEntity>();
 
         public ICollection<Func<string, string[]>> CacheInvalidationStore = 
             new Collection<Func<string, string[]>>();
@@ -33,7 +33,7 @@ namespace HTTPCaching.API.MessageHandlers {
             CancellationToken cancellationToken) {
 
             var resourceKey = GetResourceKey(request.RequestUri, _varyHeaders, request);
-            CachableEntity cachableEntity = null;
+            CacheableEntity cacheableEntity = null;
             var cacheControlHeader = new CacheControlHeaderValue {
                 Private = true,
                 MustRevalidate = true,
@@ -45,13 +45,13 @@ namespace HTTPCaching.API.MessageHandlers {
                 var eTags = request.Headers.IfNoneMatch;
                 var modifiedSince = request.Headers.IfModifiedSince;
                 var anyEtagsFromTheClientExist = eTags.Any();
-                var doWeHaveanyCachableEtityForTheRequest =
-                    _eTagCacheDictionary.TryGetValue(resourceKey, out cachableEntity);
+                var doWeHaveAnyCacheableEntityForTheRequest =
+                    _eTagCacheDictionary.TryGetValue(resourceKey, out cacheableEntity);
 
                 if (anyEtagsFromTheClientExist) {
 
-                    if (doWeHaveanyCachableEtityForTheRequest) {
-                        if (eTags.Any(x => x.Tag == cachableEntity.EntityTag.Tag)) {
+                    if (doWeHaveAnyCacheableEntityForTheRequest) {
+                        if (eTags.Any(x => x.Tag == cacheableEntity.EntityTag.Tag)) {
 
                             var tempResp = new  HttpResponseMessage(HttpStatusCode.NotModified);
                             tempResp.Headers.CacheControl = cacheControlHeader;
@@ -61,8 +61,8 @@ namespace HTTPCaching.API.MessageHandlers {
                 }
                 else if (modifiedSince.HasValue) {
 
-                    if (doWeHaveanyCachableEtityForTheRequest) {
-                        if (cachableEntity.IsValid(modifiedSince.Value)) {
+                    if (doWeHaveAnyCacheableEntityForTheRequest) {
+                        if (cacheableEntity.IsValid(modifiedSince.Value)) {
 
                             var tempResp = new HttpResponseMessage(HttpStatusCode.NotModified);
                             tempResp.Headers.CacheControl = cacheControlHeader;
@@ -86,14 +86,14 @@ namespace HTTPCaching.API.MessageHandlers {
             if (response.IsSuccessStatusCode) {
 
                 if (request.Method == HttpMethod.Get &&
-                    !_eTagCacheDictionary.TryGetValue(resourceKey, out cachableEntity)) { 
+                    !_eTagCacheDictionary.TryGetValue(resourceKey, out cacheableEntity)) { 
 
-                    cachableEntity = new CachableEntity(resourceKey);
-                    cachableEntity.EntityTag = GenerateETag();
-                    cachableEntity.LastModfied = DateTimeOffset.Now;
+                    cacheableEntity = new CacheableEntity(resourceKey);
+                    cacheableEntity.EntityTag = GenerateETag();
+                    cacheableEntity.LastModified = DateTimeOffset.Now;
 
                     _eTagCacheDictionary.AddOrUpdate(
-                        resourceKey, cachableEntity, (k, e) => cachableEntity);
+                        resourceKey, cacheableEntity, (k, e) => cacheableEntity);
                 }
 
                 if (request.Method == HttpMethod.Put || 
@@ -117,7 +117,7 @@ namespace HTTPCaching.API.MessageHandlers {
                         cacheEntityKeys.ForEach(key => {
                             if (!string.IsNullOrEmpty(key)) {
 
-                                CachableEntity outVal = null;
+                                CacheableEntity outVal = null;
                                 _eTagCacheDictionary.TryRemove(key, out outVal);
                             }
                         });
@@ -126,8 +126,8 @@ namespace HTTPCaching.API.MessageHandlers {
                 else {
 
                     response.Headers.CacheControl = cacheControlHeader;
-                    response.Headers.ETag = cachableEntity.EntityTag;
-                    response.Content.Headers.LastModified = cachableEntity.LastModfied;
+                    response.Headers.ETag = cacheableEntity.EntityTag;
+                    response.Content.Headers.LastModified = cacheableEntity.LastModified;
 
                     _varyHeaders.ForEach(
                         varyHeader => response.Headers.Vary.Add(varyHeader));

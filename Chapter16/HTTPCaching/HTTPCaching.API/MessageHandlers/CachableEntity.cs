@@ -6,20 +6,20 @@ using System.Web;
 
 namespace HTTPCaching.API.MessageHandlers {
 
-    public class CachableEntity {
+    public class CacheableEntity {
 
-        public CachableEntity(string resourceKey) {
+        public CacheableEntity(string resourceKey) {
 
             ResourceKey = resourceKey;
         }
 
         public string ResourceKey { get; private set; }
         public EntityTagHeaderValue EntityTag { get; set; }
-        public DateTimeOffset LastModfied { get; set; }
+        public DateTimeOffset LastModified { get; set; }
 
         public bool IsValid(DateTimeOffset modifiedSince) {
 
-            var lastModified = LastModfied.UtcDateTime;
+            var lastModified = LastModified.UtcDateTime;
             return (lastModified.AddSeconds(-1) < modifiedSince.UtcDateTime);
         }
     }

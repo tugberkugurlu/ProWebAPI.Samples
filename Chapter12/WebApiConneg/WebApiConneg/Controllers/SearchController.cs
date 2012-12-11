@@ -8,7 +8,7 @@ namespace WebApiConneg.Controllers {
         private readonly string[] _persons =
             new[] { "Bill", "Steve", "Scott", "Glenn", "Daniel" };
 
-        public IEnumerable<string> Get([FromUri] Search search) {
+        public IEnumerable<string> Get(Search search) {
             return _persons
             .Where(w => w.Contains(search.Text))
             .Take(search.MaxResults);

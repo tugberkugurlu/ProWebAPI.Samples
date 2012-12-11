@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        label
+        {
+            display: block;
+        }
+
+        fieldset
+        {
+            width: 170px;
+        }
+    </style>
+    <script type="text/javascript" src="Scripts/jquery-1.7.2.js"></script>
+</head>
+<body>
+    <form id="newcar">
+        <fieldset>
+            <legend>New Car</legend>
+            <label for="Make">Make:</label>
+            <input type="text" name="Make" />
+            <label for="Model">Model:</label>
+            <input type="text" name="Model" />
+            <label for="Year">Year:</label>
+            <input type="text" name="Year" />
+            <label for="Price">Price:</label>
+            <input type="text" name="Price" />
+            <input type="submit" />
+        </fieldset>
+    </form>
+    <script>
+        $(document).ready(function () {
+            $("#newcar").on("submit", function() {
+                $.post('/api/cars', $("#newcar").serialize());
+                return true;
+            });
+        })
+    </script>
+</body>
+</html>

@@ -10,15 +10,27 @@ namespace WebApiConneg
             //GlobalConfiguration.Configuration.Routes.MapHttpRoute(
             //    "DefaultApi",
             //    routeTemplate: "api/{controller}.{extension}",
-            //    defaults: new {},
-            //    constraints: new {extension = "json|xml"}
+            //    defaults: new { },
+            //    constraints: new { extension = "json|xml" }
             //    );
 
+            //routes.MapHttpRoute(
+            //    name: "DefaultApi",
+            //    routeTemplate: "api/{controller}/{id}/{format}",
+            //    defaults: new { id = RouteParameter.Optional, format = RouteParameter.Optional }
+            //);
+
+           // routes.MapHttpRoute(
+           //    name: "DefaultApi",
+           //    routeTemplate: "api/{controller}/{id}",
+           //    defaults: new { id = RouteParameter.Optional }
+           //);
+
             routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}/{format}",
-                defaults: new { id = RouteParameter.Optional, format = RouteParameter.Optional }
-            );
+               name: "DefaultApi",
+               routeTemplate: "api/{controller}/{id}",
+               defaults: new { id = RouteParameter.Optional }
+           );
         }
     }
 }

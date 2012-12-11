@@ -76,6 +76,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="jqueryhtmlform.html" />
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
     <Content Include="htmlform.html" />
@@ -93,7 +94,9 @@
     <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\ValueProviderTestController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\HelloController.cs" />
     <Compile Include="Entities\Car.cs" />
     <Compile Include="Entities\Search.cs" />
     <Compile Include="Formatters\CarCsvMediaTypeFormatter.cs" />
@@ -103,6 +106,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mappings\RouteDataMapping.cs" />
+    <Compile Include="ModelBinding\HeaderProviderFactory.cs" />
+    <Compile Include="ModelBinding\HeaderValueProvider.cs" />
+    <Compile Include="ModelBinding\SearchModelBinder.cs" />
+    <Compile Include="ModelBinding\SearchModelBinderProvider.cs" />
+    <Compile Include="ModelBinding\XHeaderValueProvider.cs" />
+    <Compile Include="ModelBinding\XHeaderValueProviderFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,8 +11,10 @@ namespace HttpRequests {
 
         protected void Application_Start(object sender, EventArgs e) {
 
-            //increases the connectionManagement/maxconnection limit
-            System.Net.ServicePointManager.DefaultConnectionLimit = int.MaxValue;
+            // increases the connectionManagement/maxconnection limit
+            // if you are on .NET 4.0. We don't need to adjust this setting here
+            // as we are under .NET 4.5. In .NET 4.5, this value is set to Int32.MaxValue by default.
+            // System.Net.ServicePointManager.DefaultConnectionLimit = int.MaxValue;
 
             GlobalConfiguration.Configuration.Routes.MapHttpRoute(
                 "DefaultHttpRoute",

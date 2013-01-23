@@ -12,6 +12,10 @@ namespace Overview.Filters {
         AttributeTargets.Class | AttributeTargets.Method)]
     public class LoggerAttribute : Attribute, IActionFilter {
 
+        public LoggerAttribute() {
+
+        }
+
         public Task<HttpResponseMessage> ExecuteActionFilterAsync(
             HttpActionContext actionContext, 
             CancellationToken cancellationToken, 

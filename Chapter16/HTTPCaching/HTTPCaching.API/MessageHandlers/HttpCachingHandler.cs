@@ -163,16 +163,15 @@ namespace HTTPCaching.API.MessageHandlers {
 
         private EntityTagHeaderValue GenerateETag() {
 
-            var eTag = string.Format("\"{0}\"",
-                Guid.NewGuid().ToString().Replace("-", ""));
+            var eTag = string.Concat(
+                "\"", Guid.NewGuid().ToString("N"), "\"");
 
             return new EntityTagHeaderValue(eTag);
         }
 
         private string GetRequestUri(Uri requestUri) {
 
-            return string.Format(
-                "{0}{1}",
+            return string.Concat(
                 requestUri.LocalPath.TrimEnd('/'),
                 requestUri.Query).ToLower(CultureInfo.InvariantCulture);
         }

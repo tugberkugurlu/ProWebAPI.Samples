@@ -8,7 +8,7 @@ using System.Web.Http.ModelBinding;
 
 namespace PerControllerConfig.Infrastructure {
 
-    public class NoJSONConfigAttribute : Attribute, IControllerConfiguration {
+    public class OnlyJsonConfigAttribute : Attribute, IControllerConfiguration {
 
         public void Initialize(
             HttpControllerSettings controllerSettings, 

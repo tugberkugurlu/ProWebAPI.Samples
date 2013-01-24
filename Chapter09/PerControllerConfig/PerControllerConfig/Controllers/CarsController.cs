@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace PerControllerConfig.Controllers {
 
-    [NoJSONConfig]
+    [OnlyJsonConfig]
     public class CarsController : ApiController {
 
         public string[] GetCars() {

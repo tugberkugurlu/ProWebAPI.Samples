@@ -2,24 +2,15 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace FirstActionSample.Models {
-
-    public class Car {
-
-        public int Id { get; set; }
-        public string Make { get; set; }
-        public string Model { get; set; }
-        public int Year { get; set; }
-        public float Price { get; set; }
-    }
 
     public class CarsContext {
 
         private static int _nextId = 9;
+        private static object _incLock = new object();
 
-        //cars store
+        // cars store
         private readonly static ConcurrentDictionary<int, Car> _carsDictionary = new ConcurrentDictionary<int, Car>(new HashSet<KeyValuePair<int, Car>> { 
             new KeyValuePair<int, Car>(1, new Car { Id = 1, Make = "Make1", Model = "Model1", Year = 2010, Price = 10732.2F }),
             new KeyValuePair<int, Car>(2, new Car { Id = 2, Make = "Make2", Model = "Model2", Year = 2008, Price = 27233.1F }),
@@ -28,7 +19,7 @@ namespace FirstActionSample.Models {
             new KeyValuePair<int, Car>(5, new Car { Id = 5, Make = "Make5", Model = "Model1", Year = 1987, Price = 56200.89F }),
             new KeyValuePair<int, Car>(6, new Car { Id = 6, Make = "Make6", Model = "Model4", Year = 1997, Price = 46003.2F }),
             new KeyValuePair<int, Car>(7, new Car { Id = 7, Make = "Make7", Model = "Model5", Year = 2001, Price = 78355.92F }),
-            new KeyValuePair<int, Car>(8, new Car { Id = 8, Make = "Make8", Model = "Model1", Year = 2011, Price = 1823223.23F })
+            new KeyValuePair<int, Car>(8, new Car { Id = 8, Make = "Make8", Model = "Model1", Year = 2011, Price = 423223.23F })
         });
 
         public IEnumerable<Car> All {
@@ -56,9 +47,12 @@ namespace FirstActionSample.Models {
 
         public Car Add(Car car) {
 
-            car.Id = _nextId;
-            _carsDictionary.TryAdd(car.Id, car);
-            _nextId++;
+            lock (_incLock) {
+
+                car.Id = _nextId;
+                _carsDictionary.TryAdd(car.Id, car);
+                _nextId++;
+            }
 
             return car;
         }

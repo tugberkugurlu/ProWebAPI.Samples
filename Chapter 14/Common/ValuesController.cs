@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace AspNetWebApi.DependencyResolution.AutoFac
+namespace AspNetWebApi.DependencyResolution
 {
     public class ValuesController : ApiController
     {

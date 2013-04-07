@@ -89,24 +89,24 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Common\ITaxCalculator.cs">
+      <Link>ITaxCalculator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\TaxCalculator.cs">
+      <Link>TaxCalculator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\ValuesController.cs">
+      <Link>ValuesController.cs</Link>
+    </Compile>
     <Compile Include="AutoFacDependencyResolver.cs" />
     <Compile Include="AutoFacDependencyScope.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ITaxCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaxCalculator.cs" />
-    <Compile Include="ValuesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

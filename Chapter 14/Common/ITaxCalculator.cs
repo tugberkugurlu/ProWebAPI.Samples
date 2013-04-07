@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AspNetWebApi.DependencyResolution.AutoFac
+namespace AspNetWebApi.DependencyResolution
 {
     public interface ITaxCalculator
     {

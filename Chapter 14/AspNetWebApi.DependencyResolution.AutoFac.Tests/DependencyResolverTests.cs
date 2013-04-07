@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Autofac;
-using NUnit.Framework;
+using Xunit;
 
 namespace AspNetWebApi.DependencyResolution.AutoFac.Tests
 {
-    [TestFixture]
     public class DependencyResolverTests
     {
 
-        [Test]
+        [Fact]
         public void TestResolve()
         {
             var builder = new ContainerBuilder();
@@ -21,10 +20,10 @@ namespace AspNetWebApi.DependencyResolution.AutoFac.Tests
 
             var autoFacDependencyResolver = new AutoFacDependencyResolver(builder.Build());
             var service = autoFacDependencyResolver.GetService(typeof (IDummy));
-            Assert.AreEqual(typeof(Dummmy), service.GetType());
+            Assert.Equal(typeof(Dummmy), service.GetType());
         }
 
-        [Test]
+        [Fact]
         public void TestResolveAll()
         {
             var builder = new ContainerBuilder();
@@ -38,8 +37,8 @@ namespace AspNetWebApi.DependencyResolution.AutoFac.Tests
 
             var autoFacDependencyResolver = new AutoFacDependencyResolver(builder.Build());
             var services = (IEnumerable<IDummy>) autoFacDependencyResolver.GetService(typeof(IEnumerable<IDummy>));
-            Assert.IsTrue(services.Any(x => x.GetType() == typeof(Dummmy)));
-            Assert.IsTrue(services.Any(x => x.GetType() == typeof(Dummmy2)));
+            Assert.True(services.Any(x => x.GetType() == typeof(Dummmy)));
+            Assert.True(services.Any(x => x.GetType() == typeof(Dummmy2)));
         }
 
 

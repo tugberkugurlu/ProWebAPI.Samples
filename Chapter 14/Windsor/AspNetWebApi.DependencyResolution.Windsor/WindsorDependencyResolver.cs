@@ -23,7 +23,7 @@ namespace AspNetWebApi.DependencyResolution.Windsor
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _container.Dispose();
         }
 
         public object GetService(Type serviceType)

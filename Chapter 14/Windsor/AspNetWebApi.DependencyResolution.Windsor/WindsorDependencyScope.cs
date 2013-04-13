@@ -10,9 +10,9 @@ namespace AspNetWebApi.DependencyResolution.Windsor
 {
     public class WindsorDependencyScope : IDependencyScope
     {
-        
+
         protected readonly IWindsorContainer _container;
-        private ConcurrentBag<object> _toBeReleased = new ConcurrentBag<object>(); 
+        private ConcurrentBag<object> _toBeReleased = new ConcurrentBag<object>();
 
         public WindsorDependencyScope(IWindsorContainer container)
         {
@@ -35,17 +35,12 @@ namespace AspNetWebApi.DependencyResolution.Windsor
         {
             if (!_container.Kernel.HasComponent(serviceType))
                 return null;
-            try
-            {
-                var resolved = _container.Resolve(serviceType);
-                if(resolved!=null)
-                    _toBeReleased.Add(resolved);
-                return resolved;
-            }
-            catch
-            {
-                return null;
-            }
+
+            var resolved = _container.Resolve(serviceType);
+            if (resolved != null)
+                _toBeReleased.Add(resolved);
+            return resolved;
+
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
@@ -53,20 +48,15 @@ namespace AspNetWebApi.DependencyResolution.Windsor
             if (!_container.Kernel.HasComponent(serviceType))
                 return new object[0];
 
-            try
+
+            var allResolved = _container.ResolveAll(serviceType).Cast<object>();
+            if (allResolved != null)
             {
-                var allResolved = _container.ResolveAll(serviceType).Cast<object>();
-                if (allResolved != null)
-                {
-                    allResolved.ToList()
-                        .ForEach(x => _toBeReleased.Add(x));
-                }
-                return allResolved;
+                allResolved.ToList()
+                    .ForEach(x => _toBeReleased.Add(x));
             }
-            catch
-            {
-                return null;
-            }
+            return allResolved;
+
         }
     }
 }

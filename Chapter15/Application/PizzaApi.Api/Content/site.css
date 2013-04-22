@@ -37,6 +37,12 @@ thead {
 td {
     vertical-align: top;
     border-width: 1px;
+
+}
+
+.hvr:hover {
+    background-color: #a4d4e6;
+    
 }
 
 .disabled {

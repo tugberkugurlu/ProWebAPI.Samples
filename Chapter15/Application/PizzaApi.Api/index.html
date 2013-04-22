@@ -49,10 +49,12 @@
                             </thead>
                             <tbody>
                                 <!-- ko foreach: orders -->
-                                <tr>
-                                    <td>#<span data-bind="text: id"></span></td>
+                                <tr class="hvr">
+                                    <td>#<a href="javascript:void(0)" data-bind="text: id"></a></td>
                                     <td><span data-bind="text: customerName"></span></td>
                                     <td><span data-bind="text: totalPriceFormatted"></span></td>
+                                    <td><a href="javascript:void(0)" data-bind="click: $parent.deleteOrder">x</a></td>
+
                                 </tr>
                                 <!-- /ko -->
                             </tbody>

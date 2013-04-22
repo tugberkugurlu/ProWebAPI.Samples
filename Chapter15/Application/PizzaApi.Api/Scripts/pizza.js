@@ -69,6 +69,10 @@
              
         });
 
+        this.deleteOrder = function() {
+            that.orders.remove(this);
+        };
+
     };
 
     ProAspNetWebApi.Samples.UnitTesting.Pizza.MainViewModel.prototype.up = function() {
@@ -97,6 +101,8 @@
         }
             
     };
+    
+   
 
     ProAspNetWebApi.Samples.UnitTesting.Pizza.MainViewModel.prototype.addOrder = function addOrder(location) {
         var that = this;

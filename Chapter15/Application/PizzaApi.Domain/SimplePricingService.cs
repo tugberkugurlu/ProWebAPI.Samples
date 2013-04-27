@@ -10,11 +10,16 @@ namespace PizzaApi.Domain
     {
         public decimal GetPrice(Order order)
         {
-            const decimal PriceForAnyPizza = 7.50m;
+            const decimal BasePriceForAnyPizza = 7.5m;
             const decimal ValueAddedTax = 0.20m;
 
-            var priceBeforeTax = order.Items.Sum(x => x.Quantity)
-                                 *PriceForAnyPizza;
+            // price of the pizza is calculated by the base price plus 
+            // 0.5 for every character in the name of the pizza! 
+
+
+            var priceBeforeTax = order.Items.Sum(x => x.Quantity * 
+                (BasePriceForAnyPizza + 0.5m*x.Name.Length));
+                                 
             return priceBeforeTax + (priceBeforeTax * ValueAddedTax);
         }
     }

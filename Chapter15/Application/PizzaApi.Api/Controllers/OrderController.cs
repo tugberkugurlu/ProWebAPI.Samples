@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
-using PizzaApi.Api.Domain;
 using PizzaApi.Domain;
 
 namespace PizzaApi.Api.Controllers

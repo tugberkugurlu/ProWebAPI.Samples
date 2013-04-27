@@ -17,7 +17,8 @@
            EDIT_ORDER = "Editing #",
            PLACE_ORDER = "Place order",
            UPDATE_ORDER = "Update order",
-           rootUrl = window.location.href;
+           rootUrl = window.location.href,
+           rootNamespace;
 
     if (rootUrl.indexOf("/#"))
         rootUrl = rootUrl.replace("/#", "");
@@ -39,7 +40,9 @@
 
     namespace("ProAspNetWebApi.Samples.UnitTesting.Pizza");
 
-    ProAspNetWebApi.Samples.UnitTesting.Pizza.MainViewModel = function MainViewModel() {
+    rootNamespace = ProAspNetWebApi.Samples.UnitTesting.Pizza;
+
+    rootNamespace.MainViewModel = function MainViewModel() {
 
         var that = this;
         this.rootUrl = rootUrl;
@@ -47,6 +50,9 @@
         this.customerName = ko.observable();
         this.orderTitle = ko.observable(NEW_ORDER);
         this.buttonText = ko.observable(PLACE_ORDER);
+        this.isUpdateOrderMode = ko.computed(function() {
+            return that.buttonText() !== PLACE_ORDER;
+        });
 
         this.PizzaMenu = [
             "Hawaiian",
@@ -58,8 +64,9 @@
             "Ham and Mushroom",
             "Pepperoni"
         ];
+        
         this.currentOrderItems = ko.observableArray(_.map(this.PizzaMenu, function(x) {
-            return new ProAspNetWebApi.Samples.UnitTesting.Pizza.OrderItem(x);
+            return new rootNamespace.OrderItem(x);
         }));
         
         this.canAdd = ko.computed(function () {
@@ -69,23 +76,92 @@
              
         });
 
-        this.deleteOrder = function() {
-            that.orders.remove(this);
+        this.deleteOrder = function () {
+            var localThat = this;
+            $.ajax({
+                type: "DELETE",
+                url: this.location
+            })
+                .success(function (data, text, xhr) {
+                    that.orders.remove(localThat);
+                });
         };
 
+        this.loadOrderForUpdate = function() {
+            that._loadOrder(this);
+            that.currentOrder = this;
+        };
+        
+        // load existing orders
+        $.ajax({
+            type: "GET",
+            url: that.rootUrl
+            })
+            .success(function (data, text, xhr) {
+                var ord;
+                _.forEach(data, function (x) {
+                    ord = new rootNamespace.Order(x);
+                    ord.location = that.rootUrl + "/" + ord.id();
+                    that.orders.push(ord);
+                });
+            });
     };
 
-    ProAspNetWebApi.Samples.UnitTesting.Pizza.MainViewModel.prototype.up = function() {
+    rootNamespace.MainViewModel.prototype._loadOrder = function (order) {
+        var that = this,
+            found;
+        if (order) {
+            
+            _.forEach(that.currentOrderItems(), function (x) {
+
+                found = _.find(order.items(), function(itm) {
+                    return itm.name == x.name();
+                });
+                
+                if (found) {
+                    x.quantity(found.quantity);
+                } else {
+                    x.quantity(0);
+                }
+
+            });
+
+            this.orderTitle(EDIT_ORDER + order.id());
+            this.buttonText(UPDATE_ORDER);
+            this.customerName(order.customerName());
+
+        } else {
+            
+            // reset quantity of pizzas
+            _.forEach(that.currentOrderItems(), function(x) {
+                x.quantity(0);
+            });
+            
+            // reset text and labels
+            this.orderTitle(NEW_ORDER);
+            this.buttonText(PLACE_ORDER);
+            this.customerName(undefined);
+        }
+    };
+
+    rootNamespace.MainViewModel.prototype.cancelUpdate = function () {
+        this._loadOrder(null);
+    };
+
+    rootNamespace.MainViewModel.prototype.up = function() {
         this.quantity(this.quantity()+1);
     };
 
-    ProAspNetWebApi.Samples.UnitTesting.Pizza.MainViewModel.prototype.down = function () {
+    rootNamespace.MainViewModel.prototype.down = function () {
         this.quantity(Math.max(this.quantity()-1,0));
     };
 
-    ProAspNetWebApi.Samples.UnitTesting.Pizza.MainViewModel.prototype.placeOrder = function () {
-        var that = this;
-        if (this.buttonText() == PLACE_ORDER) {
+    
+
+    rootNamespace.MainViewModel.prototype.placeOrder = function () {
+        var that = this,
+            order = null;
+        if (this.buttonText() == PLACE_ORDER) { 
             // New order
             $.ajax({
                 type: "POST",
@@ -95,35 +171,59 @@
                 .success(function(data, text, xhr) {
                     that.addOrder(xhr.getResponseHeader("Location"));
                 });
-                ;
-        } else {
-            
+                
+        } else { // update order
+            var ord = this._buildOrders();
+            ord.id = that.currentOrder.id();
+            $.ajax({
+                
+                type: "PUT",
+                data: ord,
+                url: this.rootUrl
+            })
+                .success(function (data, text, xhr) {
+                    that.addOrder(that.currentOrder.location);
+                    that.cancelUpdate();
+                });
         }
             
     };
     
    
 
-    ProAspNetWebApi.Samples.UnitTesting.Pizza.MainViewModel.prototype.addOrder = function addOrder(location) {
-        var that = this;
+    rootNamespace.MainViewModel.prototype.addOrder = function addOrder(location) {
+        var that = this,
+            tmp = null;
         $.ajax({ url: location })
             .success(function (data, text, xhr) {
-                that.orders.push(new ProAspNetWebApi.Samples.UnitTesting.Pizza.Order(data));
+                var newOrder = new rootNamespace.Order(data);
+                newOrder.location = location;
+                tmp = _.find(that.orders(), function (x) { return x.id() == data.id; });
+                if (tmp) { // update 
+                    // copy
+                    tmp.id(newOrder.id());
+                    tmp.customerName(newOrder.customerName());
+                    tmp.totalPrice(newOrder.totalPrice());
+                    tmp.items(newOrder.items());
+
+                } else { // place order
+                    that.orders.push(newOrder);
+                }
             });
     };
 
-    ProAspNetWebApi.Samples.UnitTesting.Pizza.MainViewModel.prototype._buildOrders = function () {
-        return new ProAspNetWebApi.Samples.UnitTesting.Pizza.OrderDto(this.customerName,
+    rootNamespace.MainViewModel.prototype._buildOrders = function () {
+        return new rootNamespace.OrderDto(this.customerName(),
             _.reduce(this.currentOrderItems(), 
                 function(memo, x) {
                     if (x.quantity())
-                        memo.push(new ProAspNetWebApi.Samples.UnitTesting.Pizza.OrderItemDto(x.name(), x.quantity()));
+                        memo.push(new rootNamespace.OrderItemDto(x.name(), x.quantity()));
                     return memo;
                 }, [] )
             );
     };
     
-    ProAspNetWebApi.Samples.UnitTesting.Pizza.Order = function Order(data) {
+    rootNamespace.Order = function Order(data) {
         var that = this;
         this.items =ko.observableArray(data.items);
         this.id = ko.observable(data.id);
@@ -134,19 +234,19 @@
         });
     };
     
-    ProAspNetWebApi.Samples.UnitTesting.Pizza.OrderDto = function OrderDto(customerName, items) {
+    rootNamespace.OrderDto = function OrderDto(customerName, items) {
         this.items = items;
         this.id = 0;
         this.customerName = customerName;
         this.totalPrice = 0;
     };
 
-    ProAspNetWebApi.Samples.UnitTesting.Pizza.OrderItem = function OrderItem(name) {
+    rootNamespace.OrderItem = function OrderItem(name) {
         this.name = ko.observable(name);
         this.quantity = ko.observable(0);
     };
     
-    ProAspNetWebApi.Samples.UnitTesting.Pizza.OrderItemDto = function OrderItemDto(name, quantity) {
+    rootNamespace.OrderItemDto = function OrderItemDto(name, quantity) {
         this.name = name;
         this.quantity = quantity;
     };

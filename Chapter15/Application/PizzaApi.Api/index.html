@@ -23,9 +23,13 @@
             <table>
                 <tr>
                     <td>
-                        <h2 data-bind="text:orderTitle"></h2>
+                        <h2 >
+                            <span data-bind="text: orderTitle"></span>
+                            <a href="javascript:void(0)" data-bind="visible: isUpdateOrderMode, click: cancelUpdate">Cancel</a>                        
+                        </h2>
                         <div>Customer name</div>
-                        <input type="text" data-bind="value: customerName" /><input type="button" data-bind="enable: canAdd, css: { disabled: !canAdd() }, click: placeOrder, value: buttonText" />
+                        <input type="text" data-bind="value: customerName" />
+                        <input type="button" data-bind="enable: canAdd, css: { disabled: !canAdd() }, click: placeOrder, value: buttonText" />
                         <ol>
                             <!-- ko foreach: currentOrderItems -->
                             <ul>
@@ -50,7 +54,7 @@
                             <tbody>
                                 <!-- ko foreach: orders -->
                                 <tr class="hvr">
-                                    <td>#<a href="javascript:void(0)" data-bind="text: id"></a></td>
+                                    <td>#<a href="javascript:void(0)" data-bind="text: id, click: $parent.loadOrderForUpdate"></a></td>
                                     <td><span data-bind="text: customerName"></span></td>
                                     <td><span data-bind="text: totalPriceFormatted"></span></td>
                                     <td><a href="javascript:void(0)" data-bind="click: $parent.deleteOrder">x</a></td>

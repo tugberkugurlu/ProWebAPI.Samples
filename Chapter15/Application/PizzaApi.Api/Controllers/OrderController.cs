@@ -26,9 +26,7 @@ namespace PizzaApi.Api.Controllers
             _orderService.Save(order);
 
             var response = request.CreateResponse(HttpStatusCode.Created);
-            var builder = new UriBuilder(request.RequestUri);
-            builder.Path += "/" + order.Id.ToString();
-            response.Headers.Location = builder.Uri;
+            response.Headers.Location = new Uri(Url.Link(null, new { id = order.Id }));
             return response;
         }
 

@@ -11,7 +11,7 @@ namespace PizzaApi.Api.Controllers
 {
     public class OrderController : ApiController
     {
-        private readonly  IOrderService _orderService;
+        private readonly IOrderService _orderService;
 
         public OrderController(IOrderService orderService)
         {
@@ -23,10 +23,12 @@ namespace PizzaApi.Api.Controllers
             if (!order.Items.Any())
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, "Order has no items");
 
-            _orderService.Save(order);
+            if(_orderService.Exists(order.Id))
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "Order already exists");
 
+            _orderService.Save(order);
             var response = request.CreateResponse(HttpStatusCode.Created);
-            response.Headers.Location = new Uri(Url.Link(null, new { id = order.Id }));
+            response.Headers.Location = new Uri(Url.Link(null, new {id = order.Id}));
             return response;
         }
 
@@ -35,7 +37,7 @@ namespace PizzaApi.Api.Controllers
             if (!_orderService.Exists(id))
                 return request.CreateErrorResponse(HttpStatusCode.NotFound, "Order does not exist");
 
-            return request.CreateResponse(HttpStatusCode.OK,  _orderService.Get(id));
+            return request.CreateResponse(HttpStatusCode.OK, _orderService.Get(id));
         }
 
         public IEnumerable<Order> Get()
@@ -49,7 +51,7 @@ namespace PizzaApi.Api.Controllers
                 return request.CreateErrorResponse(HttpStatusCode.NotFound, "Order does not exist");
 
             _orderService.Delete(id);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return request.CreateResponse(HttpStatusCode.OK);
         }
 
 
@@ -59,9 +61,7 @@ namespace PizzaApi.Api.Controllers
                 return request.CreateErrorResponse(HttpStatusCode.NotFound, "Order does not exist");
 
             _orderService.Update(order);
-            return Request.CreateResponse(HttpStatusCode.OK);
-            
+            return request.CreateResponse(HttpStatusCode.OK);
         }
-
     }
 }

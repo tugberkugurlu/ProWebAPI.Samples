@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,14 @@ namespace PizzaApi.Domain
     public class Order
     {
         public Order()
+            : this(new OrderItem[0])
         {
-            Items = new List<OrderItem>();
+
+        }
+
+        public Order(IEnumerable<OrderItem> orderItems)
+        {
+            Items = new List<OrderItem>(orderItems);            
         }
         
         public IEnumerable<OrderItem> Items { get; private set; }

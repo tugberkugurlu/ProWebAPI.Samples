@@ -34,6 +34,9 @@
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -64,10 +67,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\PizzaApi.Api\PizzaApi.Api.csproj">
+      <Project>{269b4fa9-bf86-4faa-b849-77fd6718bfba}</Project>
+      <Name>PizzaApi.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Application\PizzaApi.Domain\PizzaApi.Domain.csproj">
+      <Project>{74f84f4a-ee42-406d-b05f-ed5932d65786}</Project>
+      <Name>PizzaApi.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

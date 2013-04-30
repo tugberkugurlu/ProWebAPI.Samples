@@ -28,7 +28,7 @@ namespace PizzaApi.Api.Controllers
 
             _orderService.Save(order);
             var response = request.CreateResponse(HttpStatusCode.Created);
-            response.Headers.Location = new Uri(Url.Link(null, new {id = order.Id}));
+            response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = order.Id }));
             return response;
         }
 

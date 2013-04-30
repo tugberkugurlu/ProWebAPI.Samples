@@ -247,13 +247,18 @@ namespace PizzaApi.Api.Tests
             mockOrderService.Setup(x => x.Exists(It.IsAny<int>()))
                         .Returns(false);
 
-            var orderController = new OrderController(mockOrderService.Object);
-            var request = new HttpRequestMessage();
-            request.Properties[HttpPropertyKeys.HttpConfigurationKey] = new HttpConfiguration();
+            var orderController = ControllerContextSetup
+                .Of(() => new OrderController(mockOrderService.Object))
+                .WithDefaultConfig()
+                .WithDefaultRoute()
+                .Requesting("http://localhost:2345/api/Order/123")
+                .WithRouteData(new {id="123", controller="Order"})
+                .Build<OrderController>();
+
 
             // act
-            var result = orderController.Post(request, order);
-
+            var result = orderController.Post(orderController.Request, order);
+            
             // assert
             Assert.Equal(HttpStatusCode.Created, result.StatusCode);
         }

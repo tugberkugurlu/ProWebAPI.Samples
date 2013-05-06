@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using System.Web.Http.Hosting;
+using System.Web.Http.Routing;
 using Moq;
 using PizzaApi.Api.Controllers;
 using PizzaApi.Domain;
@@ -247,20 +248,61 @@ namespace PizzaApi.Api.Tests
             mockOrderService.Setup(x => x.Exists(It.IsAny<int>()))
                         .Returns(false);
 
+            var orderController = new OrderController(mockOrderService.Object);
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:2345/api/Order");
+            var config = new HttpConfiguration();
+            request.Properties[HttpPropertyKeys.HttpConfigurationKey] = config;
+            orderController.Request = request;
+            orderController.Configuration = config;
+            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new {id = RouteParameter.Optional});
+            var route = config.Routes["DefaultApi"];
+            var httpRouteData = new HttpRouteData(route, new HttpRouteValueDictionary(new { controller = "Order" }));
+            orderController.Request.Properties[HttpPropertyKeys.HttpRouteDataKey] = httpRouteData;
+            
+            // act
+            var result = orderController.Post(request, order);
+
+            // assert
+            Assert.Equal(HttpStatusCode.Created, result.StatusCode);
+        }
+
+        [Fact]
+        public void Post_should_return_Created_if_order_good_fluentApi()
+        {
+            // arrange
+            const string url = "http://localhost:2345/api/Order/";
+            const int OrderId = 123;
+            var order = new Order(new OrderItem[]
+                                      {
+                                          new OrderItem()
+                                              {
+                                                  Name = "Name",
+                                                  Quantity = 1
+                                              }
+                                      })
+            {
+                Id = OrderId
+            };
+            var mockOrderService = new Mock<IOrderService>();
+            mockOrderService.Setup(x => x.Exists(It.IsAny<int>()))
+                        .Returns(false);
+
             var orderController = ControllerContextSetup
                 .Of(() => new OrderController(mockOrderService.Object))
                 .WithDefaultConfig()
                 .WithDefaultRoute()
-                .Requesting("http://localhost:2345/api/Order/123")
-                .WithRouteData(new {id="123", controller="Order"})
+                .Requesting(url)
+                .WithRouteData(new {controller="Order"})
                 .Build<OrderController>();
 
-
+            
             // act
             var result = orderController.Post(orderController.Request, order);
             
             // assert
             Assert.Equal(HttpStatusCode.Created, result.StatusCode);
+            Assert.NotNull(result.Headers.Location);
+            Assert.Equal(result.Headers.Location, new Uri(new Uri(url), order.Id.ToString()));
         }
     }
 }

@@ -12,10 +12,17 @@ namespace PizzaApi.Api.App_Start
     {
         public static void Register(HttpConfiguration config)
         {
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new {id = RouteParameter.Optional}
+                );
+
+            config.Routes.MapHttpRoute(
+                name: "OrderItems",
+                routeTemplate: "api/Order/{id}/{controller}/{name}",
+                defaults: new { name = RouteParameter.Optional }
                 );
 
             var builder = new ContainerBuilder();
@@ -24,6 +31,8 @@ namespace PizzaApi.Api.App_Start
                    .SingleInstance();
             builder.RegisterType<OrderController>()
                 .As<OrderController>();
+            builder.RegisterType<OrderItemController>()
+             .As<OrderItemController>();
             builder.RegisterType<SimplePricingService>()
                    .As<IPricingService>();
 

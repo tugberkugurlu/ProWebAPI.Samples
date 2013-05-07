@@ -34,7 +34,7 @@ namespace PizzaApi.Api.Tests
 
             request.Headers.Add(XHttpMethodOverrideHandler.XOVERRIDEHEADER, xHttpMethodValue);
             var methodInfo = typeof (DelegatingHandler).GetMethods(
-                BindingFlags.NonPublic | BindingFlags.FlattenHierarchy | BindingFlags.Instance)
+                BindingFlags.NonPublic | BindingFlags.Instance)
                                       .First(x => x.Name == "SendAsync");
 
             

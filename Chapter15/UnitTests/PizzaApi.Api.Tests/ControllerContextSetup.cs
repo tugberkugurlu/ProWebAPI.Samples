@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
+using System.Web.Http.Controllers;
 using System.Web.Http.Hosting;
 using System.Web.Http.Routing;
 
@@ -14,6 +15,7 @@ namespace PizzaApi.Api.Tests
 
         private const string DefaultApiName = "DefaultApi";
         private readonly ApiController _controller;
+        private HttpRouteData _httpRouteData;
 
         private ControllerContextSetup(ApiController controller)
         {
@@ -120,8 +122,8 @@ namespace PizzaApi.Api.Tests
         public ControllerContextSetup WithRouteData(HttpRouteValueDictionary routeValues)
         {
             var route = _controller.Configuration.Routes[DefaultApiName];
-            var httpRouteData = new HttpRouteData(route, routeValues); 
-            _controller.Request.Properties[HttpPropertyKeys.HttpRouteDataKey] = httpRouteData;
+            _httpRouteData = new HttpRouteData(route, routeValues); 
+            _controller.Request.Properties[HttpPropertyKeys.HttpRouteDataKey] = _httpRouteData;
             return this;
         }
 
@@ -133,6 +135,10 @@ namespace PizzaApi.Api.Tests
 
         public ApiController Build()
         {
+            _controller.ControllerContext =
+                new HttpControllerContext(_controller.Configuration, 
+                    _httpRouteData ?? new HttpRouteData(_controller.Configuration.Routes.FirstOrDefault()) , 
+                    _controller.Request);
             return _controller;
         }
 
@@ -140,7 +146,7 @@ namespace PizzaApi.Api.Tests
         public T Build<T>()
             where T : ApiController
         {
-            return (T) _controller;
+            return (T) Build();
         }
     }
 }

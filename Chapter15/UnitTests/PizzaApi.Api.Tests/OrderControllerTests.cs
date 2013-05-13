@@ -11,6 +11,7 @@ using System.Web.Http.Routing;
 using Moq;
 using PizzaApi.Api.Controllers;
 using PizzaApi.Domain;
+using SubSpec;
 using Xunit;
 
 namespace PizzaApi.Api.Tests
@@ -35,6 +36,44 @@ namespace PizzaApi.Api.Tests
             // assert
             Assert.Equal(orders, result);
         }
+
+        [Specification]
+        public void GetAll_should_return_all_from_OrderService_Subspec()
+        {
+            
+            var orders = default(Order[]);
+            var mockOrderService = default(Mock<IOrderService>);
+            var orderController = default(OrderController);
+            var result = default(IEnumerable<Order>);
+
+            "Given order service contains no orders"
+                .Context(() =>
+                             {
+                                 orders = new Order[0];
+                                 mockOrderService = new Mock<IOrderService>();
+                                 orderController = new OrderController(mockOrderService.Object);
+                                 mockOrderService.Setup(x => x.GetAll())
+                                                 .Returns(orders);
+                             });
+
+
+            "When I ask for all orders from orderController"
+                .Do(() =>
+                        {
+                            result = orderController.Get();
+                        });
+            "Then it must not be null"
+                .Observation(() =>
+                                 {
+                                     Assert.NotNull(result);
+                                 });
+            "And it should contain no order"
+                .Observation(() =>
+                                 {
+                                     Assert.Empty(result);
+                                 });
+        }
+
 
         [Fact]
         public void Get_should_return_OK_if_order_exists()

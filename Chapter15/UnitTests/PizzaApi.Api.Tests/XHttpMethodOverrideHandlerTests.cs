@@ -33,14 +33,11 @@ namespace PizzaApi.Api.Tests
                 "http://localhost:12345/foo/bar");
 
             request.Headers.Add(XHttpMethodOverrideHandler.XOVERRIDEHEADER, xHttpMethodValue);
-            var methodInfo = typeof (DelegatingHandler).GetMethods(
-                BindingFlags.NonPublic | BindingFlags.Instance)
-                                      .First(x => x.Name == "SendAsync");
+            var invoker = new HttpMessageInvoker(handler);
 
-            
 
             // act
-            var result = methodInfo.Invoke(handler, new object[] {request, new CancellationToken()});
+            var result = invoker.SendAsync(request, new CancellationToken());
 
             // assert
             Assert.Equal(expectedMethod, innerHandlder.Request.Method.Method);

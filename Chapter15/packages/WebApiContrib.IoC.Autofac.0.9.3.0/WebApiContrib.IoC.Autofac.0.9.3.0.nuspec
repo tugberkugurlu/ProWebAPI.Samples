@@ -16,8 +16,5 @@
       <dependency id="Autofac" version="2.6.3.862" />
       <dependency id="Microsoft.AspNet.WebApi.Core" version="4.0.20710.0" />
     </dependencies>
-    <references>
-      <reference file="WebApiContrib.IoC.Autofac.dll" />
-    </references>
   </metadata>
 </package>

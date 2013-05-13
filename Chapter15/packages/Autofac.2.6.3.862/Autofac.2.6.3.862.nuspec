@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Autofac</id>
     <version>2.6.3.862</version>
@@ -12,9 +12,5 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Base assemblies for the Autofac Inversion of Control Container</description>
     <summary>Autofac is an IoC container for Microsoft .NET. It manages the dependencies between classes so that applications stay easy to change as they grow in size and complexity.</summary>
-    <references>
-      <reference file="Autofac.Configuration.dll" />
-      <reference file="Autofac.dll" />
-    </references>
   </metadata>
 </package>

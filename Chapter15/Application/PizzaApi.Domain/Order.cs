@@ -19,7 +19,7 @@ namespace PizzaApi.Domain
             Items = new List<OrderItem>(orderItems);            
         }
         
-        public IEnumerable<OrderItem> Items { get; private set; }
+        public IEnumerable<OrderItem> Items { get; set; }
 
         public decimal TotalPrice { get; set; }
 
